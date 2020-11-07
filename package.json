@@ -24,5 +24,10 @@
   "bugs": {
     "url": "https://github.com/MikhailMasny/awesome-frontend-template/issues"
   },
-  "homepage": "https://github.com/MikhailMasny/awesome-frontend-template#readme"
+  "homepage": "https://github.com/MikhailMasny/awesome-frontend-template#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.6.1",
+    "@typescript-eslint/parser": "^4.6.1",
+    "eslint": "^7.13.0"
+  }
 }
