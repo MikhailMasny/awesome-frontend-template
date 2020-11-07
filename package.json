@@ -1,0 +1,28 @@
+{
+  "name": "awesome-frontend-template",
+  "version": "1.0.0",
+  "description": "Front-End modern template",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikhailMasny/awesome-frontend-template.git"
+  },
+  "keywords": [
+    "frontend",
+    "webpack",
+    "sass",
+    "eslint",
+    "prettier",
+    "typescript",
+    "editorconfig"
+  ],
+  "author": "Mikhail M.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MikhailMasny/awesome-frontend-template/issues"
+  },
+  "homepage": "https://github.com/MikhailMasny/awesome-frontend-template#readme"
+}
