@@ -1,38 +1,43 @@
-const path = require('path');
+const path = require("path");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-  mode: 'none',
-  target: 'web',
+  mode: "none",
+  target: "web",
   entry: {
-    app: path.join(__dirname, 'src', 'index.ts')
+    app: path.join(__dirname, "src", "index.ts"),
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, "build"),
+    filename: "[name].[contenthash].js",
+  },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
   },
   devServer: {
-    contentBase: path.resolve(__dirname, "dist"),
+    contentBase: path.resolve(__dirname, "build"),
     compress: true,
-    port: 3000
+    port: 3000,
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: [".tsx", ".ts", ".js"],
   },
   module: {
     rules: [
       {
-        enforce: 'pre',
+        enforce: "pre",
         test: /\.ts$/,
         exclude: /node_modules/,
-        loader: 'eslint-loader',
+        loader: "eslint-loader",
       },
       {
         test: /\.ts?$/,
-        use: 'ts-loader',
+        use: "ts-loader",
         exclude: /node_modules/,
       },
       {
@@ -40,10 +45,10 @@ module.exports = {
         use: {
           loader: "file-loader",
           options: {
-            name: '[name].[contenthash].[ext]',
-            publicPath: 'images/',
-            outputPath: 'images/',
-            esModule: false
+            name: "[name].[contenthash].[ext]",
+            publicPath: "images/",
+            outputPath: "images/",
+            esModule: false,
           },
         },
       },
@@ -51,20 +56,18 @@ module.exports = {
         test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
         use: [
           {
-            loader: 'file-loader',
+            loader: "file-loader",
             options: {
-              name: '[name].[ext]',
-              publicPath: '/',
-              outputPath: 'fonts/'
-            }
-          }
-        ]
+              name: "[name].[ext]",
+              publicPath: "/",
+              outputPath: "fonts/",
+            },
+          },
+        ],
       },
       {
-        test:/\.html$/,
-        use: [
-          'html-loader'
-        ]
+        test: /\.html$/,
+        use: ["html-loader"],
       },
       {
         test: /\.s[ac]ss$/i,
@@ -72,8 +75,8 @@ module.exports = {
           {
             loader: MiniCssExtractPlugin.loader,
           },
-          'css-loader',
-          'sass-loader',
+          "css-loader",
+          "sass-loader",
         ],
       },
     ],
@@ -81,23 +84,23 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      filename: './index.html',
+      template: "./src/index.html",
+      filename: "./index.html",
       minify: {
         collapseWhitespace: true,
         removeComments: true,
         removeRedundantAttributes: true,
-        useShortDoctype: true
+        useShortDoctype: true,
       },
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash].css',
+      filename: "[name].[contenthash].css",
     }),
     new CopyPlugin({
       patterns: [
         {
           from: path.resolve(__dirname, "src/favicon.ico"),
-          to: path.resolve(__dirname, "dist")
+          to: path.resolve(__dirname, "build"),
         },
       ],
     }),

@@ -5,7 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
+        "prettier",
+        "prettier/@typescript-eslint"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -13,7 +14,8 @@
         "tsconfigRootDir": "."
     },
     "plugins": [
-        "@typescript-eslint"
+        "@typescript-eslint",
+        "eslint-plugin-prettier"
     ],
     "rules": {
       "max-len": [
@@ -22,6 +24,7 @@
           "code": 140
         }
       ],
+      "prettier/prettier": "error",
       "semi": ["error", "always"],
       "quotes": ["error", "double"]
     }
