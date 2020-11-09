@@ -1,24 +1,32 @@
 import "./style.scss";
 
-const email = document.getElementById("email") as HTMLInputElement;
-const name1 = document.getElementById("name") as HTMLInputElement;
+import { httpGet, httpPost } from "./typescript/http-request";
+import { Todo, Post, PostResponse } from "./typescript/interfaces";
 
-const xhr = new XMLHttpRequest();
-xhr.open("POST", "/api");
-xhr.setRequestHeader("Content-type", "application/json");
-xhr.setRequestHeader("Accept", "application/json");
-xhr.send(JSON.stringify({ email, name1 }));
+const buttonGet = document.querySelector("#buttonGet") as HTMLInputElement;
+const buttonPost = document.querySelector("#buttonPost") as HTMLInputElement;
+const title = document.getElementById("title") as HTMLInputElement;
+const body = document.getElementById("body") as HTMLInputElement;
 
-xhr.onreadystatechange = () => {
-  if (xhr.readyState !== 4) {
-    return;
-  }
-  if (xhr.status !== 200) {
-    const response: Partial<{ errors: { name1: string; email: string } }> = JSON.parse(xhr.response);
-    const errors = document.getElementById("errors") as HTMLDivElement;
-    errors.innerHTML = response.errors ? response.errors.email || response.errors.name1 : "Send error. Try again.";
-  } else {
-    const success = document.getElementById("success") as HTMLDivElement;
-    success.innerHTML = "Form sent!";
-  }
-};
+buttonGet?.addEventListener("click", handleGetClick);
+buttonPost?.addEventListener("click", handlePostClick);
+
+async function handleGetClick() {
+  console.log("Clicked!");
+  const response = await httpGet<Todo[]>("https://jsonplaceholder.typicode.com/todos");
+  console.log(response);
+}
+
+async function handlePostClick() {
+  console.log("Clicked!");
+  const url: string = "https://jsonplaceholder.typicode.com/posts";
+  const method: string = "POST";
+  const obj: Post = {
+    title: title.value,
+    body: body.value,
+    userId: 1,
+  };
+  const header: string = "application/json; charset=UTF-8";
+  const response = await httpPost<PostResponse[]>(url, method, obj, header);
+  console.log(response);
+}

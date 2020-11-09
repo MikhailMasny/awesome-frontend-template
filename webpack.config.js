@@ -30,40 +30,9 @@ module.exports = {
   module: {
     rules: [
       {
-        enforce: "pre",
-        test: /\.ts$/,
-        exclude: /node_modules/,
-        loader: "eslint-loader",
-      },
-      {
         test: /\.ts?$/,
         use: "ts-loader",
         exclude: /node_modules/,
-      },
-      {
-        test: /\.(png|jpg|svg|gif)$/,
-        use: {
-          loader: "file-loader",
-          options: {
-            name: "[name].[contenthash].[ext]",
-            publicPath: "images/",
-            outputPath: "images/",
-            esModule: false,
-          },
-        },
-      },
-      {
-        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: "file-loader",
-            options: {
-              name: "[name].[ext]",
-              publicPath: "/",
-              outputPath: "fonts/",
-            },
-          },
-        ],
       },
       {
         test: /\.html$/,
@@ -78,6 +47,31 @@ module.exports = {
           "css-loader",
           "sass-loader",
         ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: "file-loader",
+            options: {
+              name: "[name].[ext]",
+              publicPath: "/fonts",
+              outputPath: "/fonts",
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(png|jpg|svg|gif)$/,
+        use: {
+          loader: "file-loader",
+          options: {
+            name: "[name].[contenthash].[ext]",
+            publicPath: "images/",
+            outputPath: "images/",
+            esModule: false,
+          },
+        },
       },
     ],
   },

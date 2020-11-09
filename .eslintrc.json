@@ -4,9 +4,7 @@
         "es2021": true
     },
     "extends": [
-        "eslint:recommended",
-        "prettier",
-        "prettier/@typescript-eslint"
+        "prettier"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -15,7 +13,7 @@
     },
     "plugins": [
         "@typescript-eslint",
-        "eslint-plugin-prettier"
+        "prettier"
     ],
     "rules": {
       "max-len": [
@@ -24,7 +22,7 @@
           "code": 140
         }
       ],
-      "prettier/prettier": "error",
+      "prettier/prettier": "warning",
       "semi": ["error", "always"],
       "quotes": ["error", "double"]
     }
